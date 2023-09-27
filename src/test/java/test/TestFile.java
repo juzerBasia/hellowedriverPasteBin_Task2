@@ -19,7 +19,7 @@ public class TestFile {
         ChromeOptions optionsChrome = new ChromeOptions();
         optionsChrome.addArguments("incognito");
         //   optionsChrome.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
-        //     optionsChrome.setExperimentalOption("useAutomationExtension", false);
+        //   optionsChrome.setExperimentalOption("useAutomationExtension", false);
 
         driver = new ChromeDriver(optionsChrome);
         driver.manage().window().maximize();
@@ -27,19 +27,18 @@ public class TestFile {
     }
 
     @Test(description = "create new pastebin ", invocationCount = 5)
-    public void testRun() throws InterruptedException {
+    public void testRun()  {
         PastebinPage pp = new PastebinPage(driver);
         pp.openPage();
         log.info("Page open");
         pp.enterText("Hello from WebDriver");
-        log.info("Text entered");
         pp.selectPasteExpiration("10 Minutes");
         pp.enterPasteNameTitle("helloweb");
         pp.createNewPaste();
     }
 
     @AfterMethod(alwaysRun = true)
-    public void browserTearDown() throws InterruptedException {
+    public void browserTearDown() {
         driver.quit();
         driver = null;
     }
