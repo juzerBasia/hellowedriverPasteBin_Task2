@@ -4,11 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Actions;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,20 +51,18 @@ public class PastebinPage extends AbstractPage {
 
     private void checkForWeValueYourPrivacy() {
         try {
-            if (action.getWebElement(agreeButton).isDisplayed()) {
-                action.clickElement(agreeButton);
-                log.info("Pop up message closed");
-            }
+            action.clickElement(agreeButton);
+            log.info("Pop up message closed");
+
         } catch (Exception ignored) {
 
         }
     }
+
     private void checkForBanner() {
         try {
-            if (action.getWebElement(banner).isDisplayed()) {
-                log.info("Banner closed");
-                action.clickElement(banner);
-            }
+            action.clickElement(banner);
+            log.info("Banner closed");
         } catch (Exception ignored) {
         }
     }
@@ -121,7 +116,7 @@ public class PastebinPage extends AbstractPage {
 
         checkForWeValueYourPrivacy();
 
-        if (driver.findElements(created_errorSummary).size()>0) {
+        if (driver.findElements(created_errorSummary).size() > 0) {
             log.error("New Paste Not created");
         }
         return this;

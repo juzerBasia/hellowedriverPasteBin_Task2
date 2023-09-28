@@ -1,5 +1,3 @@
-package test;
-
 import org.junit.jupiter.api.Assertions;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +13,7 @@ import java.util.Map;
 
 
 @Slf4j
-public class TestFile extends TestNG {
+public class TestFile {
     private WebDriver driver;
 
     /*    private final String code = "git config --global user.name  New Sheriff in Town\"\n" +
