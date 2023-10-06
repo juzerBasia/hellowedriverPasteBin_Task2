@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.Actions;
+import utils.Waits;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,17 +13,8 @@ import java.util.Objects;
 
 import static driver.DriverManager.getDriver;
 
-
 @Slf4j
 public class PastebinPage extends AbstractPage {
-    Actions action = new Actions();
-    public String CODE = "code",
-            PASTE_EXPIRATION = "paste_expiration",
-            PASTE_NAME_TITLE = "paste_name_title",
-            SYNTAX_HIGHLIGHTING = "syntax_highlighting";
-    private final Map<String, String> resultMap = new HashMap<>();
-
-    private static final String HOMEPAGE_URL = "https://pastebin.com/";
 
     @FindBy(xpath = "//button[@mode='primary']")
     private WebElement agreeButton;
@@ -51,6 +42,16 @@ public class PastebinPage extends AbstractPage {
     private final By created_pasteName_Title = By.xpath("//div[@class='info-top']/h1");
     private final By created_syntax_highlighting = By.xpath("//div[@class='top-buttons']/div[@class='left']/a[1]");
 
+    Waits wait = new Waits();
+    private static final Map<String, String> resultMap = new HashMap<>();
+
+    public static final String CODE = "code",
+    PASTE_EXPIRATION = "paste_expiration",
+    PASTE_NAME_TITLE = "paste_name_title",
+    SYNTAX_HIGHLIGHTING = "syntax_highlighting";
+
+    public static final String HOMEPAGE_URL = "https://pastebin.com/";
+
     public PastebinPage() {
         super();
     }
@@ -59,14 +60,14 @@ public class PastebinPage extends AbstractPage {
     public PastebinPage openPage() {
         getDriver().get(HOMEPAGE_URL);
         log.info("Page open");
-        action.clickElement(agreeButton);
-        action.clickElement(banner);
+        wait.clickElement(agreeButton);
+        wait.clickElement(banner);
         return this;
     }
 
     private void checkForWeValueYourPrivacy() {
         try {
-            action.clickElement(agreeButton);
+            wait.clickElement(agreeButton);
             log.info("Pop up message closed");
         } catch (Exception ignored) {
         }
@@ -87,9 +88,7 @@ public class PastebinPage extends AbstractPage {
         if (Objects.equals(text, "")) {
             log.error("No text provided");
         } else {
-
-            action.clickElement(pasteExpirationField);
-
+            wait.clickElement(pasteExpirationField);
             List<WebElement> element = pasteExpirationFieldOptions;
             for (int i = 0; i < element.size(); i++) {
                 String temp = element.get(i).getText();
@@ -116,7 +115,7 @@ public class PastebinPage extends AbstractPage {
     }
 
     public PastebinPage createNewPaste() {
-        action.clickElement(createNewPasteButton);
+        wait.clickElement(createNewPasteButton);
         log.info("Create New Paste button clicked ");
         checkForWeValueYourPrivacy();
         if (created_errorSummary.size() > 0) {
@@ -126,8 +125,8 @@ public class PastebinPage extends AbstractPage {
     }
 
     public PastebinPage selectSyntaxHighlighting(String text) {
-        action.clickElement(syntaxHighlightingField);
-        action.sendText(syntaxHighlightingInput, text);
+        wait.clickElement(syntaxHighlightingField);
+        wait.sendText(syntaxHighlightingInput, text);
         log.info("Syntax Highlighting data entered: "+text);
         return this;
     }
@@ -144,14 +143,24 @@ public class PastebinPage extends AbstractPage {
 
         switch (element) {
             case "code":
-                return action.getTextFromWebElements(created_code);
+                return getTextFromWebElements(created_code);
             case ("paste_name_title"):
-                return action.getTextFromWebElement(created_pasteName_Title);
+                return wait.getTextFromWebElement(created_pasteName_Title);
             case ("syntax_highlighting"):
-                return action.getTextFromWebElement(created_syntax_highlighting);
+                return wait.getTextFromWebElement(created_syntax_highlighting);
             default:
                 System.out.println("getSwitch to be updated as element is not yet considered in the function");
         }
         return "n/a";
+    }
+
+    public String getTextFromWebElements(By by) {
+        List<WebElement> elements = getDriver().findElements(by);
+        StringBuilder sb = new StringBuilder();
+        for (WebElement we : elements) {
+            sb.append(we.getText());
+        }
+        log.info("Text copied from filed");
+        return sb.toString();
     }
 }

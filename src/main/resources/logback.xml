@@ -15,8 +15,8 @@
     </appender>
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender"><!--        <file>${DEV_HOME}/mojPlikBezNazwy.log</file>&ndash;&gt;-->
-        <file>${DEV_HOME}/timeBasedlogFile_${bySecond}.log
-        </file>  <!-- z timestamp-->        <!--        <file>${DEV_HOME}/timeBasedlogFile.log</file>-->        <!--        <append>true</append>-->
+        <file>${target}/timeBasedlogFile_${bySecond}.log
+        </file>  <!-- z timestamp-->        <!--        <file>${target}/timeBasedlogFile.log</file>-->        <!--        <append>true</append>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- daily rollover -->
             <fileNamePattern>${target}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern>
             <maxHistory>3</maxHistory>

@@ -10,17 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import page.AbstractPage;
 
 import java.time.Duration;
-import java.util.List;
 
 import static driver.DriverManager.getDriver;
 @Slf4j
-public class Actions extends AbstractPage {
+public class Waits extends AbstractPage {
 
-    public Actions() {
-        super();
-    }
-
-    public Actions sendText(WebElement webElement, String text) {
+    public Waits sendText(WebElement webElement, String text) {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(WAIT_TIME_SECONDS));
         WebElement element = wait.until(ExpectedConditions.visibilityOf(webElement));
         element.sendKeys(text);
@@ -55,13 +50,5 @@ public class Actions extends AbstractPage {
         return null;
     }
 
-    public String getTextFromWebElements(By by) {
-        List<WebElement> elements = getDriver().findElements(by);
-        StringBuilder sb = new StringBuilder();
-        for (WebElement we : elements) {
-            sb.append(we.getText());
-        }
-        log.info("Text copied from filed");
-        return sb.toString();
-    }
+
 }
