@@ -10,16 +10,25 @@
 # files
 *.tmp
 *.log
-
-.DS_Store
+*.log.DS_Store
 *.out
 *.swp
+*.zip
 
 #folders
-/target/
+target/
+test-output/
 
 #intellij idea
 .idea
 *.iml
 *.ipr
 *.iws
+
+# eclipse
+.classpath
+.project
+.settings/
+
+#gedit
+.~

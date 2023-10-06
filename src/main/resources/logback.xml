@@ -3,7 +3,7 @@
     <property name="maxHistory" value="3"/>
     <property name="totalSizeCap" value="30KB"/>
     <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
-    <property name="DEV_HOME" value="${user.dir}/log"/>
+    <property name="DEV_HOME" value="${target}/log"/>
     <property name="fileName" value="timeBasedLogFile_"/>
     <logger name="org.apache" level="ERROR"/>
     <logger name="httpclient" level="ERROR"/>
@@ -18,7 +18,7 @@
         <file>${DEV_HOME}/timeBasedlogFile_${bySecond}.log
         </file>  <!-- z timestamp-->        <!--        <file>${DEV_HOME}/timeBasedlogFile.log</file>-->        <!--        <append>true</append>-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- daily rollover -->
-            <fileNamePattern>${DEV_HOME}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern>
+            <fileNamePattern>${target}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern>
             <maxHistory>3</maxHistory>
             <totalSizeCap>30KB</totalSizeCap>
         </rollingPolicy>
