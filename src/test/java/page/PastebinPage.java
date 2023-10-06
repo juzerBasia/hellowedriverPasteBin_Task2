@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.Waits;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 import static driver.DriverManager.getDriver;
@@ -37,18 +35,16 @@ public class PastebinPage extends AbstractPage {
     @FindBy(xpath = "//div[@class='error-summary']")
     private List<WebElement> created_errorSummary;
 
-    //below are used to get text from WebElements -> findElements(By by)
+    @FindBy(xpath = "//div[@class='info-top']/h1")
+    private WebElement created_pasteName_Title;
+
+    @FindBy(xpath = "//div[@class='top-buttons']/div[@class='left']/a[1]")
+    private WebElement created_syntax_highlighting;
+
     private final By created_code = By.xpath("//*[contains(@class,'source')]/ol/li");
-    private final By created_pasteName_Title = By.xpath("//div[@class='info-top']/h1");
-    private final By created_syntax_highlighting = By.xpath("//div[@class='top-buttons']/div[@class='left']/a[1]");
+
 
     Waits wait = new Waits();
-    private static final Map<String, String> resultMap = new HashMap<>();
-
-    public static final String CODE = "code",
-    PASTE_EXPIRATION = "paste_expiration",
-    PASTE_NAME_TITLE = "paste_name_title",
-    SYNTAX_HIGHLIGHTING = "syntax_highlighting";
 
     public static final String HOMEPAGE_URL = "https://pastebin.com/";
 
@@ -78,7 +74,6 @@ public class PastebinPage extends AbstractPage {
             log.error("No text provided");
         } else {
             textAreaField.sendKeys(text);
-            resultMap.put(CODE, "to be updated");
             log.info("Text entered: " + text);
         }
         return this;
@@ -94,7 +89,6 @@ public class PastebinPage extends AbstractPage {
                 String temp = element.get(i).getText();
                 if (temp.equals(text)) {
                     log.info("Selected: " + element.get(i).getText());
-                    resultMap.put(PASTE_EXPIRATION, element.get(i).getText());
                     element.get(i).click();
                     break;
                 }
@@ -131,29 +125,6 @@ public class PastebinPage extends AbstractPage {
         return this;
     }
 
-    public Map<String, String> collectResults(String... elements) {
-        for (String element : elements) {
-            String text = getTextSwitch(element);
-            resultMap.put(element, text);
-        }
-        return resultMap;
-    }
-
-    public String getTextSwitch(String element) {
-
-        switch (element) {
-            case "code":
-                return getTextFromWebElements(created_code);
-            case ("paste_name_title"):
-                return wait.getTextFromWebElement(created_pasteName_Title);
-            case ("syntax_highlighting"):
-                return wait.getTextFromWebElement(created_syntax_highlighting);
-            default:
-                System.out.println("getSwitch to be updated as element is not yet considered in the function");
-        }
-        return "n/a";
-    }
-
     public String getTextFromWebElements(By by) {
         List<WebElement> elements = getDriver().findElements(by);
         StringBuilder sb = new StringBuilder();
@@ -162,5 +133,17 @@ public class PastebinPage extends AbstractPage {
         }
         log.info("Text copied from filed");
         return sb.toString();
+    }
+
+    public WebElement getCreated_pasteName_Title() {
+        return created_pasteName_Title;
+    }
+
+    public WebElement getCreated_syntax_highlighting() {
+        return created_syntax_highlighting;
+    }
+
+    public By getCreated_code() {
+        return created_code;
     }
 }
