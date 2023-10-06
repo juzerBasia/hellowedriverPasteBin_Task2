@@ -34,15 +34,11 @@ public class PastebinPage extends AbstractPage {
     private WebElement syntaxHighlightingInput;
     @FindBy(xpath = "//div[@class='error-summary']")
     private List<WebElement> created_errorSummary;
-
     @FindBy(xpath = "//div[@class='info-top']/h1")
     private WebElement created_pasteName_Title;
-
     @FindBy(xpath = "//div[@class='top-buttons']/div[@class='left']/a[1]")
     private WebElement created_syntax_highlighting;
-
     private final By created_code = By.xpath("//*[contains(@class,'source')]/ol/li");
-
 
     Waits wait = new Waits();
 
@@ -108,20 +104,19 @@ public class PastebinPage extends AbstractPage {
         return this;
     }
 
-    public PastebinPage createNewPaste() {
+    public void createNewPaste() {
         wait.clickElement(createNewPasteButton);
         log.info("Create New Paste button clicked ");
         checkForWeValueYourPrivacy();
         if (created_errorSummary.size() > 0) {
             log.error("New Paste Not created");
         }
-        return this;
     }
 
     public PastebinPage selectSyntaxHighlighting(String text) {
         wait.clickElement(syntaxHighlightingField);
         wait.sendText(syntaxHighlightingInput, text);
-        log.info("Syntax Highlighting data entered: "+text);
+        log.info("Syntax Highlighting data entered: " + text);
         return this;
     }
 
