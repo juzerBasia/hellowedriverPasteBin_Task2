@@ -9,7 +9,7 @@ import page.PastebinPage;
 @Slf4j
 public class NewPasteTest extends BaseTest {
 
-    @Test(description = "New Pastebin created ", invocationCount = 1)
+    @Test(description = "New Pastebin created ", invocationCount = 5)
     public void testRun() {
         PastebinPage pastebinPage = new PastebinPage();
 
@@ -31,9 +31,9 @@ public class NewPasteTest extends BaseTest {
                 .enterPasteNameTitle(pasteNameTitle)
                 .createNewPaste();
 
-        Assert.assertEquals(code.replace("\n", ""),pastebinPage.getTextFromWebElements(pastebinPage.getCreated_code()));
-        Assert.assertEquals(syntaxHighlighting, pastebinPage.getCreated_syntax_highlighting().getText());
-        Assert.assertEquals(pasteNameTitle,pastebinPage.getCreated_pasteName_Title().getText());
+        Assert.assertEquals(code.replace("\n", ""),pastebinPage.getTextFromWebElements(pastebinPage.getCreatedCode()));
+        Assert.assertEquals(syntaxHighlighting, pastebinPage.getCreatedSyntaxHighlighting().getText());
+        Assert.assertEquals(pasteNameTitle,pastebinPage.getCreatedPasteNameTitle().getText());
 
     }
 }
