@@ -10,14 +10,14 @@ import static utils.WaitForElement.waitUntilElementIsVisible;
 @Slf4j
 public class ActionsHelper {
 
-    public void sendText(WebElement element, String text) {
+    public static void sendText(WebElement element, String text) {
         waitUntilElementIsVisible(element);
         element.sendKeys(text);
         element.sendKeys(Keys.ENTER);
         log.info("Text sent: " + text);
     }
 
-    public void clickElement(WebElement element) {
+    public static void clickElement(WebElement element) {
         for (int i = 0; i <= 2; i++) {
             try {
                 waitUntilElementIsVisible(element);

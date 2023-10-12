@@ -41,8 +41,6 @@ public class PastebinPage extends AbstractPage {
     private WebElement afterCreatingSyntaxHighlighting;
     private final By afterCreatingCode = By.xpath("//*[contains(@class,'source')]/ol/li");
 
-    ActionsHelper actionsHelper = new ActionsHelper();
-
     public static final String homepageURL = "https://pastebin.com/";
 
     public PastebinPage() {
@@ -53,14 +51,14 @@ public class PastebinPage extends AbstractPage {
     public PastebinPage openPage() {
         getDriver().get(homepageURL);
         log.info("Page open");
-        actionsHelper.clickElement(agreeButton);
-        actionsHelper.clickElement(banner);
+        ActionsHelper.clickElement(agreeButton);
+        ActionsHelper.clickElement(banner);
         return this;
     }
 
     private void checkForWeValueYourPrivacy() {
         try {
-            actionsHelper.clickElement(agreeButton);
+            ActionsHelper.clickElement(agreeButton);
             log.info("Pop up message closed");
         } catch (Exception ignored) {
         }
@@ -80,7 +78,7 @@ public class PastebinPage extends AbstractPage {
         if (Objects.equals(text, "")) {
             log.error("No text provided");
         } else {
-            actionsHelper.clickElement(pasteExpirationField);
+            ActionsHelper.clickElement(pasteExpirationField);
             List<WebElement> element = pasteExpirationFieldOptions;
             for (WebElement webElement : element) {
                 String temp = webElement.getText();
@@ -105,7 +103,7 @@ public class PastebinPage extends AbstractPage {
     }
 
     public void createNewPaste() {
-        actionsHelper.clickElement(createNewPasteButton);
+        ActionsHelper.clickElement(createNewPasteButton);
         log.info("Create New Paste button clicked ");
         checkForWeValueYourPrivacy();
         if (afterCreatingErrorSummary.size() > 0) {
@@ -114,8 +112,8 @@ public class PastebinPage extends AbstractPage {
     }
 
     public PastebinPage selectSyntaxHighlighting(String text) {
-        actionsHelper.clickElement(syntaxHighlightingField);
-        actionsHelper.sendText(syntaxHighlightingInput, text);
+        ActionsHelper.clickElement(syntaxHighlightingField);
+        ActionsHelper.sendText(syntaxHighlightingInput, text);
         log.info("Syntax Highlighting data entered: " + text);
         return this;
     }
