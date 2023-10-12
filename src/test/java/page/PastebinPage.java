@@ -4,13 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import utils.ActionsHelper;
-
 
 import java.util.List;
 import java.util.Objects;
 
 import static driver.DriverManager.getDriver;
+import static utils.ActionsHelper.clickElement;
+import static utils.ActionsHelper.sendText;
 
 @Slf4j
 public class PastebinPage extends AbstractPage {
@@ -51,14 +51,14 @@ public class PastebinPage extends AbstractPage {
     public PastebinPage openPage() {
         getDriver().get(homepageURL);
         log.info("Page open");
-        ActionsHelper.clickElement(agreeButton);
-        ActionsHelper.clickElement(banner);
+        clickElement(agreeButton);
+        clickElement(banner);
         return this;
     }
 
     private void checkForWeValueYourPrivacy() {
         try {
-            ActionsHelper.clickElement(agreeButton);
+            clickElement(agreeButton);
             log.info("Pop up message closed");
         } catch (Exception ignored) {
         }
@@ -78,7 +78,7 @@ public class PastebinPage extends AbstractPage {
         if (Objects.equals(text, "")) {
             log.error("No text provided");
         } else {
-            ActionsHelper.clickElement(pasteExpirationField);
+            clickElement(pasteExpirationField);
             List<WebElement> element = pasteExpirationFieldOptions;
             for (WebElement webElement : element) {
                 String temp = webElement.getText();
@@ -103,7 +103,7 @@ public class PastebinPage extends AbstractPage {
     }
 
     public void createNewPaste() {
-        ActionsHelper.clickElement(createNewPasteButton);
+        clickElement(createNewPasteButton);
         log.info("Create New Paste button clicked ");
         checkForWeValueYourPrivacy();
         if (afterCreatingErrorSummary.size() > 0) {
@@ -112,8 +112,8 @@ public class PastebinPage extends AbstractPage {
     }
 
     public PastebinPage selectSyntaxHighlighting(String text) {
-        ActionsHelper.clickElement(syntaxHighlightingField);
-        ActionsHelper.sendText(syntaxHighlightingInput, text);
+        clickElement(syntaxHighlightingField);
+        sendText(syntaxHighlightingInput, text);
         log.info("Syntax Highlighting data entered: " + text);
         return this;
     }
