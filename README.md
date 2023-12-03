@@ -37,24 +37,6 @@ For this task, please, use:
 
 ***
 
-## IMPORTANT
-Pastebin was not happy with the code submitted and after some time got this wonderful screen
 
-<img width="1002" src="Pastebin_not_happpy.PNG" alt="warning">
-
-Code was commented out for the purpose of preparing test file
-
-```
-\*private final String code = "git config --global user.name  New Sheriff in Town\"\n" +
-                "git reset $(git commit-tree HEAD^{tree} -m Legacy code)\n" +
-                "git push origin master --force\n";*\
-```  
-
-I completed my file with following code
-```
- private final String code = "first Line\n" +
-        "second Line\n" +
-        "third Line";
-``` 
 
 ***Good luck!***

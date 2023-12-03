@@ -9,13 +9,10 @@ import page.PastebinPage;
 @Slf4j
 public class NewPasteTest extends BaseTest {
 
-    @Test(description = "New Pastebin created ", invocationCount = 5)
+    @Test(description = "New Pastebin created ", invocationCount = 1)
     public void testRun() {
         PastebinPage pastebinPage = new PastebinPage();
 
-        /*    private final String code = "git config --global user.name  New Sheriff in Town\"\n" +
-                "git reset $(git commit-tree HEAD^{tree} -m Legacy code)\n" +
-                "git push origin master --force\n";*/
         String code = "first Line\n" +
                 "second Line\n" +
                 "third Line";

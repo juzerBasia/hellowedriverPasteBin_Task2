@@ -7,17 +7,16 @@
     <property name="fileName" value="timeBasedLogFile_"/>
     <logger name="org.apache" level="ERROR"/>
     <logger name="httpclient" level="ERROR"/>
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"><!-- encoders are assigned the type
-             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>"%boldGreen(%class{0}) %green(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level- %msg)"%n</pattern>
         </encoder>
     </appender>
     <appender name="FILE"
-              class="ch.qos.logback.core.rolling.RollingFileAppender"><!--        <file>${DEV_HOME}/mojPlikBezNazwy.log</file>&ndash;&gt;-->
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${DEV_HOME}/timeBasedlogFile_${bySecond}.log
-        </file>  <!-- z timestamp-->        <!--        <file>${DEV_HOME}/timeBasedlogFile.log</file>-->        <!--        <append>true</append>-->
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"><!-- daily rollover -->
+        </file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${DEV_HOME}/timeBasedlogFile.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern>
             <maxHistory>3</maxHistory>
             <totalSizeCap>30KB</totalSizeCap>
